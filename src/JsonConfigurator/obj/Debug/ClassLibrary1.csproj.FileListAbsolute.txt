@@ -1,0 +1,6 @@
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.AssemblyReference.cache
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.CoreCompileInputs.cache
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Repos\2021-Team-Eta\src\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
