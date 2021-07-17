@@ -62,7 +62,7 @@ namespace Hackathon2021
             var fieldNames = graph.GetType().GetFields()
                 .Where(f => f.FieldType.GetInheritanceChain().Contains(typeof(PXSelectBase))).Select(f => f.Name);
 
-            fieldNames.ForEach(f=>AddView(graph, f, viewList, f == graph.PrimaryView));
+            fieldNames.Where(f=>!f.StartsWith("_") && !f.StartsWith("$") && char.IsUpper(f[0])).ForEach(f=>AddView(graph, f, viewList, f == graph.PrimaryView));
 
             //// Get Extension views
             //var extensions = graph.GetExtensions();
