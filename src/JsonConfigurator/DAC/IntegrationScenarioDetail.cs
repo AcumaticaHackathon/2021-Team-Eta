@@ -20,7 +20,7 @@ namespace JsonConfigurator.DAC
 
         [PXDBString(15, IsUnicode = true)]
         [PXDefault(typeof(IntegrationScenario.scenarioID))]
-        [PXParent(typeof(Select<IntegrationScenario, Where<IntegrationScenario.scenarioID, Equal<scenarioID>>>))]
+        [PXParent(typeof(Select<IntegrationScenario, Where<IntegrationScenario.scenarioID, Equal<Current<scenarioID>>>>))]
         public virtual string ScenarioID { get; set; }
 
         public abstract class scenarioID : BqlString.Field<scenarioID>
@@ -99,6 +99,19 @@ namespace JsonConfigurator.DAC
         public virtual string Url { get; set; }
 
         public abstract class url : BqlString.Field<url>
+        {
+        }
+
+        #endregion
+
+        #region StatusCode
+
+        [PXDBString(3)]
+        [StatusCode]
+        [PXUIField(DisplayName = "Status Code")]
+        public virtual string StatusCode { get; set; }
+
+        public abstract class statusCode : BqlString.Field<statusCode>
         {
         }
 

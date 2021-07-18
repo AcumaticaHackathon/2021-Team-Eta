@@ -7,6 +7,7 @@ using System.Web.Http;
 using JsonConfigurator.DAC;
 using PX.Common;
 using PX.Data;
+using PX.SM;
 
 namespace JsonConfigurator
 {
@@ -97,15 +98,15 @@ namespace JsonConfigurator
 
         [Route("graphdetails")]
         [HttpGet]
-        public IHttpActionResult Get()
+        public IHttpActionResult GetGraphDetails()
         {
-            return Get("PX.Objects.SO.SOOrderEntry");
+            return GetGraphDetails("PX.Objects.SO.SOOrderEntry");
         }
 
 
         [Route("graphdetails")]
         [HttpGet]
-        public IHttpActionResult Get([FromUri] string graphName)
+        public IHttpActionResult GetGraphDetails([FromUri] string graphName)
         {
             var graph = loadGraph(graphName);
             var viewList = new ViewList();
@@ -121,6 +122,24 @@ namespace JsonConfigurator
             //extensions.ForEach(e => e.Views.ForEach(v => AddView(graph, v.Value, viewList)));
 
             return Json(viewList);
+        }
+
+        [Route("graphlist")]
+        [HttpGet]
+        public IHttpActionResult GetGraphList()
+        {
+            var graphs = PXDatabase.Select<SiteMap>().Select(s => s.Graphtype);
+
+            return Json(graphs.ToArray());
+        }
+
+        [Route("mappinglist")]
+        [HttpGet]
+        public IHttpActionResult GetMappingList()
+        {
+            var keys = JsonMappingRepository.GetKeys();
+
+            return Json(keys.ToArray());
         }
 
         private void AddView(PXGraph graph, string viewName, ViewList viewList, bool isPrimary = false)

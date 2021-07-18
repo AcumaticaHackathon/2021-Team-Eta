@@ -30,6 +30,7 @@ SortOrder int NOT NULL,
 Mapping nvarchar(15) NOT NULL,
 Direction varchar(3) NOT NULL,
 Webhook uniqueidentifier null,
-Url nvarchar(256) NULL
+Url nvarchar(256) NULL,
+StatusCode varchar(3) NULL
 )
 GO

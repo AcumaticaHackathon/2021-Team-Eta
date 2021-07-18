@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DirectionType.cs" />
+    <Compile Include="Attributes\StatusCode.cs" />
     <Compile Include="Controller\JsonMappingRepository.cs" />
     <Compile Include="DAC\IntegrationScenario.cs" />
     <Compile Include="DAC\IntegrationScenarioDetail.cs" />

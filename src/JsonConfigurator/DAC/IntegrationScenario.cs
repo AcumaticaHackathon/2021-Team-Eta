@@ -11,6 +11,7 @@ namespace JsonConfigurator.DAC
     {
         #region Scenario ID
         [PXDBString(15, IsUnicode = true, IsKey = true)]
+        [PXUIField(DisplayName = "Scenario ID")]
         [PXSelector(typeof(Search<IntegrationScenario.scenarioID>))]
         public virtual string ScenarioID { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 using JsonConfigurator.DAC;
 using PX.Data;
@@ -7,6 +8,11 @@ namespace JsonConfigurator
 {
     internal static class JsonMappingRepository
     {
+        public static IEnumerable<string> GetKeys()
+        {
+            return PXDatabase.Select<JsonMappingConfiguration>().Select(c => c.MappingID);
+        }
+
         public static JsonMappingConfiguration GetMappingRecord(string mappingID)
         {
             return PXDatabase.Select<JsonMappingConfiguration>().FirstOrDefault(s => s.MappingID == mappingID);
