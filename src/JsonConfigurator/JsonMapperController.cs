@@ -49,6 +49,10 @@ namespace Hackathon2021
             }
         }
 
+        [Route("saveconfig")]
+        [HttpPost]
+        public IHttpActionResult SaveConfig()
+
         [Route("graphdetails")]
         [HttpGet]
         public IHttpActionResult Get([FromUri] string graphName)

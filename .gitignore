@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/JsonConfigurator/.vs/ClassLibrary1/v16
+/src/.vs/2021-team-eta/v16
