@@ -51,7 +51,34 @@ namespace Hackathon2021
 
         [Route("saveconfig")]
         [HttpPost]
-        public IHttpActionResult SaveConfig()
+        public IHttpActionResult SaveConfig([FromUri]string mappingId, [FromBody]string payload)
+        {
+            var record = PXDatabase.Select<JsonMappingConfiguration>().FirstOrDefault(s => s.MappingID == mappingId);
+
+            if (record is null)
+            {
+                PXDatabase.Insert<JsonMappingConfiguration>(
+                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.MappingID), mappingId),
+                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.ConfigString), payload));
+            }
+            else
+            {
+                PXDatabase.Update<JsonMappingConfiguration>(
+                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.MappingID), mappingId),
+                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.ConfigString), payload));
+            }
+
+            return Ok();
+        }
+
+        [Route("loadconfig")]
+        [HttpGet]
+        public IHttpActionResult LoadConfig([FromUri] string mappingId)
+        {
+            var record = PXDatabase.Select<JsonMappingConfiguration>().FirstOrDefault(s => s.MappingID == mappingId);
+
+            return Ok(record?.ConfigString);
+        }
 
         [Route("graphdetails")]
         [HttpGet]
