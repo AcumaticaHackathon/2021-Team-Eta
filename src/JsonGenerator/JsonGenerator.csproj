@@ -82,8 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetPath)" "C:\Program Files\Acumatica ERP\AcuHack01\bin"
-</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="AfterBuild">
+	  <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="C:\Acumatica\Sites\Hackathon\Bin\$(AssemblyName).dll" />
+  </Target>
 </Project>

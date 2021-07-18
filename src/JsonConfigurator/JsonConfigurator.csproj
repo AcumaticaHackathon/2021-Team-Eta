@@ -98,7 +98,12 @@
     <Compile Include="Controller\Startup.cs" />
     <Compile Include="PushNotification.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\JsonGenerator\JsonGenerator.csproj">
+      <Project>{64fa6c3e-ed3d-472b-8c80-e30b1316f558}</Project>
+      <Name>JsonGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="C:\Acumatica\Sites\Hackathon\Bin\$(AssemblyName).dll" />

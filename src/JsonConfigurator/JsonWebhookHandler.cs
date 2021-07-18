@@ -16,6 +16,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Hackathon.Eta.JsonGenerator;
+using JsonConfigurator.Attributes;
 using JsonConfigurator.DAC;
 using Newtonsoft.Json;
 using PX.Api.Webhooks.DAC;
@@ -34,18 +36,43 @@ namespace JsonConfigurator
                 _graph = new PXGraph();
                 GetIntegrationScenario(request.RequestUri.ToString());
 
-                string body = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                // We dont care about request body right now
+                //string body = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                return Task.FromResult(SendResponse(HttpStatusCode.Accepted, default));
+                // Generate Response
+                string output = "";
+
+                HttpStatusCode code = HttpStatusCode.OK;
+                switch (_response.StatusCode)
+                {
+                    case StatusCode.Created:
+                        code = HttpStatusCode.Created;
+                        break;
+                    case StatusCode.Accepted:
+                        code = HttpStatusCode.Accepted;
+                        break;
+                    case StatusCode.NoContent:
+                        code = HttpStatusCode.Accepted;
+                        break;
+                }
+
+                if (!(_responseMapping is null))
+                {
+                    output = JsonGenerator.Generate(_responseMapping.ConfigString,
+                        CreateInstance(Type.GetType(_responseMapping.GraphName)));
+                }
+                
+
+                return Task.FromResult(SendResponse(code, output));
             }
             
         }
 
-        protected IHttpActionResult SendResponse(HttpStatusCode code, object result, string message = "", bool success = true)
+        protected IHttpActionResult SendResponse(HttpStatusCode code, string result, string message = "", bool success = true)
         {
             HttpResponseMessage response = new HttpResponseMessage()
             {
-                Content = new StringContent(JsonConvert.SerializeObject(result)),
+                Content = new StringContent(result),
                 StatusCode = code
             };
 
@@ -73,6 +100,13 @@ namespace JsonConfigurator
                             And<IntegrationScenarioDetail.matchingStep,
                                 Equal<Required<IntegrationScenarioDetail.lineNbr>>>>>
                     .Select(_graph, _request.ScenarioID, _request.LineNbr);
+
+            _requestMapping =
+                PXSelect<JsonMappingConfiguration, Where<JsonMappingConfiguration.mappingID,
+                    Equal<Required<JsonMappingConfiguration.mappingID>>>>.Select(this, _request?.Mapping);
+            _responseMapping =
+                PXSelect<JsonMappingConfiguration, Where<JsonMappingConfiguration.mappingID,
+                    Equal<Required<JsonMappingConfiguration.mappingID>>>>.Select(this, _response?.Mapping);
         }
 
         private IDisposable GetAdminScope()
@@ -92,6 +126,8 @@ namespace JsonConfigurator
 
         private IntegrationScenarioDetail _request;
         private IntegrationScenarioDetail _response;
+        private JsonMappingConfiguration _requestMapping;
+        private JsonMappingConfiguration _responseMapping;
         private PXGraph _graph;
     }
 }
