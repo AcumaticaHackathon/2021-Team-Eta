@@ -1,5 +1,5 @@
 ﻿
-namespace Hackathon2021
+namespace JsonConfigurator
 {
     public class JsonMappingRepository
     {

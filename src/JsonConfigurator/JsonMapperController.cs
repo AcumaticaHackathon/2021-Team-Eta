@@ -4,12 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Compilation;
 using System.Web.Http;
-using JsonConfigurator;
+using JsonConfigurator.DAC;
 using PX.Common;
 using PX.Data;
-using PX.Web.UI.WebApi.Controllers;
 
-namespace Hackathon2021
+namespace JsonConfigurator
 {
     [RoutePrefix("jsonmapping")]
     public class JsonMapperController : ApiController

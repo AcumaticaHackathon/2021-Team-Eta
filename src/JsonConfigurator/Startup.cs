@@ -7,13 +7,13 @@
 // ----------------------------------------------------------------------------------
 #endregion
 
-using Autofac;
-using Autofac.Integration.WebApi;
 using System.Reflection;
 using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
 using Module = Autofac.Module;
 
-namespace ClassLibrary1
+namespace JsonConfigurator
 {
     public class Startup
     {

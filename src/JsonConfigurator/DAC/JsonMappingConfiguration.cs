@@ -12,7 +12,7 @@ using System;
 using PX.Data;
 using PX.Data.BQL;
 
-namespace JsonConfigurator
+namespace JsonConfigurator.DAC
 {
     [Serializable]
     [PXCacheName("JsonMappingConfiguration")]
