@@ -7,3 +7,12 @@
 /src/JsonConfigurator/bin/Debug
 /src/JsonConfigurator/obj/Debug
 /.vs
+/src/JsonGenerator/obj/Debug
+/src/JsonGenerator/obj/Release
+/src/JsonGenerator/bin/Debug
+/src/packages/Json.Net.1.0.33
+/src/packages/Newtonsoft.Json.13.0.1
+/src/packages/System.Buffers.4.5.1
+/src/packages/System.Memory.4.5.4
+/src/packages/System.Numerics.Vectors.4.5.0
+/src/packages/System.Runtime.CompilerServices.Unsafe.5.0.0
