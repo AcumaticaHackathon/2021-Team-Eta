@@ -28,7 +28,7 @@ ScenarioID nvarchar(15) NOT NULL,
 LineNbr int NOT NULL,
 SortOrder int NOT NULL,
 Direction varchar(3) NOT NULL,
-
+MatchingStep int NULL,
 
 Mapping nvarchar(15)  NULL,
 

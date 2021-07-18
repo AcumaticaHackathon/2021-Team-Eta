@@ -41,6 +41,19 @@ namespace JsonConfigurator.DAC
 
         #endregion
 
+        #region MatchingStep
+
+        [PXDBInt()]
+        public virtual int? MatchingStep { get; set; }
+
+        public abstract class matchingStep : BqlInt.Field<matchingStep>
+        {
+        }
+
+        #endregion
+
+        
+
         #region SortOrder
 
         [PXDBInt()]
@@ -82,8 +95,8 @@ namespace JsonConfigurator.DAC
         [PXDBGuid()]
         [PXUIField(DisplayName = "Webhook")]
         [PXUIEnabled(typeof(Where<direction, Equal<DirectionType.inboundRequest>>))]
-        [PXSelector(typeof(Search<WebHook.webHookID>), DescriptionField = typeof(WebHook.name))]
-        public virtual string Webhook { get; set; }
+        [PXSelector(typeof(Search<WebHook.webHookID, Where<WebHook.handler, Equal<Constants.jsonWebhookHandler>>>), DescriptionField = typeof(WebHook.name))]
+        public virtual Guid? Webhook { get; set; }
 
         public abstract class webhook : BqlString.Field<webhook>
         {
@@ -108,6 +121,7 @@ namespace JsonConfigurator.DAC
 
         [PXDBString(3)]
         [StatusCode]
+        [PXUIEnabled(typeof(Where<direction, Equal<DirectionType.inboundResponse>, Or<direction, Equal<DirectionType.outboundResponse>>>))]
         [PXUIField(DisplayName = "Status Code")]
         public virtual string StatusCode { get; set; }
 

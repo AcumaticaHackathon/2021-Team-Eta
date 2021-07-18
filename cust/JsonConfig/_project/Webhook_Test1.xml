@@ -1,0 +1,13 @@
+﻿<Webhook>
+    <data-set>
+        <relations format-version="3" relations-version="20160101" main-table="WebHook" />
+        <layout>
+            <table name="WebHook" />
+        </layout>
+        <data>
+            <WebHook>
+                <row WebHookID="b20809dc-28ad-4cae-b36f-d0b8514e926b" Name="Test1" Handler="JsonConfigurator.JsonWebhookHandler" IsActive="1" IsSystem="0" RequestLogLevel="0" RequestRetainCount="10" NoteID="6f817772-90e7-eb11-bad9-482ae32d97aa" />
+            </WebHook>
+        </data>
+    </data-set>
+</Webhook>

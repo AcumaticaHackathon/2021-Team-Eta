@@ -26,11 +26,11 @@
 		<Levels>
 			<px:PXGridLevel DataMember="Detail">
 			    <Columns>
-                    <px:PXGridColumn DataField="Direction"/>
-                    <px:PXGridColumn DataField="WebHook"/>
+                    <px:PXGridColumn DataField="Direction" CommitChanges="true"/>
+                    <px:PXGridColumn DataField="WebHook" DisplayMode="Text"/>
                     <px:PXGridColumn DataField="Mapping"/>
                     <px:PXGridColumn DataField="url"/>
-                    
+                    <px:PXGridColumn DataField="StatusCode"/>
 			    </Columns>
 			</px:PXGridLevel>
 		</Levels>
