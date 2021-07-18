@@ -1,13 +1,4 @@
-﻿#region #Copyright
-//  ----------------------------------------------------------------------------------
-// COPYRIGHT (c) 2021 CONTOU CONSULTING
-// ALL RIGHTS RESERVED
-// AUTHOR: Kyle Vanderstoep
-// CREATED DATE: 2021/07/17
-// ----------------------------------------------------------------------------------
-#endregion
-
-
+﻿
 using System;
 using PX.Data;
 using PX.Data.BQL;

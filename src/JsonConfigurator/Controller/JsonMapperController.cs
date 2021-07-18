@@ -20,31 +20,37 @@ namespace JsonConfigurator
 
         #region Request Models
 
-        public class FieldDescription {
+        public class FieldDescription
+        {
             public string ID { get; set; }
             public string Column { get; set; }
 
-            public FieldDescription(string id, string column) {
+            public FieldDescription(string id, string column)
+            {
                 ID = id;
                 Column = column;
             }
         }
 
-        public class ViewDescription {
+        public class ViewDescription
+        {
             public string ID { get; set; }
             public string Name { get; set; }
             public List<FieldDescription> Fields { get; set; }
             public bool Primary { get; set; }
 
-            public ViewDescription() {
+            public ViewDescription()
+            {
                 Fields = new List<FieldDescription>();
             }
         }
 
-        public class ViewList {
+        public class ViewList
+        {
             public List<ViewDescription> views;
 
-            public ViewList() {
+            public ViewList()
+            {
                 views = new List<ViewDescription>();
             }
         }
@@ -64,7 +70,7 @@ namespace JsonConfigurator
 
         [Route("saveconfig")]
         [HttpPost]
-        public IHttpActionResult SaveConfig([FromBody]MappingRecord payload)
+        public IHttpActionResult SaveConfig([FromBody] MappingRecord payload)
         {
             var record = JsonMappingRepository.GetMappingRecord(payload.MappingID);
 
@@ -103,12 +109,12 @@ namespace JsonConfigurator
         {
             var graph = loadGraph(graphName);
             var viewList = new ViewList();
-            
+
             // Get graph views
             var fieldNames = graph.GetType().GetFields()
                 .Where(f => f.FieldType.GetInheritanceChain().Contains(typeof(PXSelectBase))).Select(f => f.Name);
 
-            fieldNames.Where(f=>f.IsUiView()).ForEach(f=>AddView(graph, f, viewList, f == graph.PrimaryView));
+            fieldNames.Where(f => f.IsUiView()).ForEach(f => AddView(graph, f, viewList, f == graph.PrimaryView));
 
             //// Get Extension views
             //var extensions = graph.GetExtensions();
@@ -142,8 +148,10 @@ namespace JsonConfigurator
                 // Get Main Fields of the Table
                 foreach (PropertyInfo property in dac.GetType().GetProperties())
                 {
-                    var uiAttributeName = property.GetCustomAttribute<PXUIFieldAttribute>()?.DisplayName ?? property.Name;
-                    viewObject.Fields.Add(new FieldDescription(uiAttributeName.EscapeJson(), property.Name.EscapeJson()));
+                    var uiAttributeName =
+                        property.GetCustomAttribute<PXUIFieldAttribute>()?.DisplayName ?? property.Name;
+                    viewObject.Fields.Add(
+                        new FieldDescription(uiAttributeName.EscapeJson(), property.Name.EscapeJson()));
                 }
 
                 // Get Extension fields of the table
@@ -152,8 +160,10 @@ namespace JsonConfigurator
                 {
                     foreach (PropertyInfo property in extension.GetType().GetProperties())
                     {
-                        var uiAttributeName = property.GetCustomAttribute<PXUIFieldAttribute>()?.DisplayName ?? property.Name;
-                        viewObject.Fields.Add(new FieldDescription(uiAttributeName.EscapeJson(), property.Name.EscapeJson()));
+                        var uiAttributeName = property.GetCustomAttribute<PXUIFieldAttribute>()?.DisplayName ??
+                                              property.Name;
+                        viewObject.Fields.Add(new FieldDescription(uiAttributeName.EscapeJson(),
+                            property.Name.EscapeJson()));
                     }
                 }
             }

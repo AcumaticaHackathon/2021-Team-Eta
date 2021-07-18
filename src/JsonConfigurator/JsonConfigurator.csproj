@@ -40,6 +40,9 @@
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>AcumaticaDLLs\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
+    <Reference Include="PX.Api.Webhooks">
+      <HintPath>AcumaticaDLLs\PX.Api.Webhooks.dll</HintPath>
+    </Reference>
     <Reference Include="PX.Common">
       <HintPath>AcumaticaDLLs\PX.Common.dll</HintPath>
     </Reference>
@@ -71,10 +74,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DirectionType.cs" />
     <Compile Include="Controller\JsonMappingRepository.cs" />
+    <Compile Include="DAC\IntegrationScenario.cs" />
+    <Compile Include="DAC\IntegrationScenarioDetail.cs" />
     <Compile Include="DAC\JsonMappingConfiguration.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Controller\JsonMapperController.cs" />
+    <Compile Include="IntegrationScenarioMaint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controller\Startup.cs" />
   </ItemGroup>
