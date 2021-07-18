@@ -30,6 +30,20 @@ namespace JsonConfigurator.DAC
 
         #endregion
 
+        #region GraphName
+
+        [PXDBString(100)]
+        [PXUIField(DisplayName = "Graph")]
+        public virtual string GraphName { get; set; }
+
+        public abstract class graphName : BqlString.Field<graphName>
+        {
+        }
+
+        #endregion
+
+        
+
         #region ConfigString
 
         [PXDBText()]

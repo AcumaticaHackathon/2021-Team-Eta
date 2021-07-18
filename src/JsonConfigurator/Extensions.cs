@@ -28,5 +28,15 @@ namespace JsonConfigurator
                 .Replace("\"", "\\" + "\"") //    Double quote to be replaced with \"
                 .Replace("\\", @"\\");            //Backslash to be replaced with \\
         }
+
+        public static bool IsUiView(this string viewName)
+        {
+            if (string.IsNullOrWhiteSpace(viewName)) return false;
+            return
+                !viewName.StartsWith("_")
+                && !viewName.StartsWith("$")
+                && char.IsUpper(viewName[0])
+                && !viewName.StartsWith("Current");
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace JsonConfigurator
         // 3) A method which returns previously stored JSON description
         // 4) A method which makes something useful with final JSON
 
-        #region Api methods
+        #region Request Models
 
         public class FieldDescription {
             public string ID { get; set; }
@@ -29,6 +29,7 @@ namespace JsonConfigurator
                 Column = column;
             }
         }
+
         public class ViewDescription {
             public string ID { get; set; }
             public string Name { get; set; }
@@ -48,23 +49,32 @@ namespace JsonConfigurator
             }
         }
 
+        public class MappingRecord
+        {
+            public string MappingID { get; set; }
+
+            public string GraphName { get; set; }
+
+            public string ConfigString { get; set; }
+        }
+
+        #endregion
+
+        #region Api methods
+
         [Route("saveconfig")]
         [HttpPost]
-        public IHttpActionResult SaveConfig([FromUri]string mappingId, [FromBody]string payload)
+        public IHttpActionResult SaveConfig([FromBody]MappingRecord payload)
         {
-            var record = PXDatabase.Select<JsonMappingConfiguration>().FirstOrDefault(s => s.MappingID == mappingId);
+            var record = JsonMappingRepository.GetMappingRecord(payload.MappingID);
 
             if (record is null)
             {
-                PXDatabase.Insert<JsonMappingConfiguration>(
-                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.MappingID), mappingId),
-                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.ConfigString), payload));
+                JsonMappingRepository.InsertNewRecord(payload);
             }
             else
             {
-                PXDatabase.Update<JsonMappingConfiguration>(
-                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.MappingID), mappingId),
-                    new PXDataFieldAssign(nameof(JsonMappingConfiguration.ConfigString), payload));
+                JsonMappingRepository.UpdateRecord(payload);
             }
 
             return Ok();
@@ -74,17 +84,23 @@ namespace JsonConfigurator
         [HttpGet]
         public IHttpActionResult LoadConfig([FromUri] string mappingId)
         {
-            var record = PXDatabase.Select<JsonMappingConfiguration>().FirstOrDefault(s => s.MappingID == mappingId);
+            var record = JsonMappingRepository.GetMappingRecord(mappingId);
 
             return Ok(record?.ConfigString);
         }
 
         [Route("graphdetails")]
         [HttpGet]
+        public IHttpActionResult Get()
+        {
+            return Get("PX.Objects.SO.SOOrderEntry");
+        }
+
+
+        [Route("graphdetails")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] string graphName)
         {
-            graphName = "PX.Objects.SO.SOOrderEntry";
-
             var graph = loadGraph(graphName);
             var viewList = new ViewList();
             
@@ -92,7 +108,7 @@ namespace JsonConfigurator
             var fieldNames = graph.GetType().GetFields()
                 .Where(f => f.FieldType.GetInheritanceChain().Contains(typeof(PXSelectBase))).Select(f => f.Name);
 
-            fieldNames.Where(f=>!f.StartsWith("_") && !f.StartsWith("$") && char.IsUpper(f[0])).ForEach(f=>AddView(graph, f, viewList, f == graph.PrimaryView));
+            fieldNames.Where(f=>f.IsUiView()).ForEach(f=>AddView(graph, f, viewList, f == graph.PrimaryView));
 
             //// Get Extension views
             //var extensions = graph.GetExtensions();
