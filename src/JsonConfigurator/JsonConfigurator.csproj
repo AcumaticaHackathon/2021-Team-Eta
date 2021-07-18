@@ -73,14 +73,11 @@
   <ItemGroup>
     <Compile Include="DAC\JsonMappingConfiguration.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="JsonMapperController.cs" />
-    <Compile Include="JsonMappingRepository.cs" />
+    <Compile Include="Controller\JsonMapperController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="Controller\Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="../$(AssemblyName).dll" />
