@@ -1,0 +1,7 @@
+﻿<Sql TableName="JsonMappingConfiguration" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="JsonMappingConfiguration">
+  <col name="MappingID" type="NVarChar(15)" />
+  <col name="GraphName" type="VarChar(100)" raw-default="''" />
+  <col name="ConfigString" type="VarChar(MAX)" nullable="true" />
+</table>]]></CDATA>
+</Sql>

@@ -1,0 +1,12 @@
+﻿<Sql TableName="IntegrationScenarioDetail" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="IntegrationScenarioDetail">
+  <col name="ScenarioID" type="NVarChar(15)" />
+  <col name="LineNbr" type="Int" />
+  <col name="SortOrder" type="Int" />
+  <col name="Direction" type="VarChar(3)" />
+  <col name="Mapping" type="NVarChar(15)" nullable="true" />
+  <col name="Webhook" type="UniqueIdentifier" nullable="true" />
+  <col name="Url" type="NVarChar(256)" nullable="true" />
+  <col name="StatusCode" type="VarChar(3)" nullable="true" />
+</table>]]></CDATA>
+</Sql>

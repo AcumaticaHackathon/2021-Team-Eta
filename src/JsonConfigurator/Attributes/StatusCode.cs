@@ -14,14 +14,17 @@ namespace JsonConfigurator.Attributes
     public class StatusCode : PXStringListAttribute
     {
         public const string OK = "200";
-        public const string Created = "202";
-        public const string Unauthorized = "403";
+        public const string Created = "201";
+        public const string Accepted = "202";
+        public const string NoContent = "204";
         
-        public StatusCode() : base(new []{OK, Created, Unauthorized}, new []
+        
+        public StatusCode() : base(new []{OK, Created, Accepted, NoContent}, new []
         {
             nameof(OK),
             nameof(Created),
-            nameof(Unauthorized)
+            nameof(Accepted),
+            "No Content"
         })
         {
             

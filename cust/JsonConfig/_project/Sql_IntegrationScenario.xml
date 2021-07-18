@@ -1,0 +1,6 @@
+﻿<Sql TableName="IntegrationScenario" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="IntegrationScenario">
+  <col name="ScenarioID" type="NVarChar(15)" />
+  <col name="LastScenarioLineNbr" type="Int" default="Zero" />
+</table>]]></CDATA>
+</Sql>

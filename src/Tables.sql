@@ -27,8 +27,11 @@ CREATE TABLE IntegrationScenarioDetail(
 ScenarioID nvarchar(15) NOT NULL,
 LineNbr int NOT NULL,
 SortOrder int NOT NULL,
-Mapping nvarchar(15) NOT NULL,
 Direction varchar(3) NOT NULL,
+
+
+Mapping nvarchar(15)  NULL,
+
 Webhook uniqueidentifier null,
 Url nvarchar(256) NULL,
 StatusCode varchar(3) NULL
