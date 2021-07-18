@@ -128,9 +128,14 @@ namespace JsonConfigurator
         [HttpGet]
         public IHttpActionResult GetGraphList()
         {
-            var graphs = PXDatabase.Select<SiteMap>().Select(s => s.Graphtype);
+            var list = new List<string>();
 
-            return Json(graphs.ToArray());
+            foreach (Type type in Assembly.Load("PX.Objects").GetTypes().Where(t=>t.GetInheritanceChain().Contains(typeof(PXGraph)) && !t.IsAbstract))
+            {
+                list.Add(type.FullName);
+            }
+
+            return Json(list.ToArray());
         }
 
         [Route("mappinglist")]
